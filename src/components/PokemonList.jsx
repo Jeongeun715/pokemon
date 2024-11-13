@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import PokemonCard from "./PokemonCard";
 import MOCK_DATA from "./MOCK_DATA";
@@ -21,7 +21,6 @@ const PokemonList = () => {
   const handleAddPokemon = (pokemon) => {
     //선택한 포켓몬을 대시보드에 추가
     //pokemon은 추가하려는 포켓몬 객체{ id: 1, korean_name: "이상해씨"... }
-
     if (myPokemon.length >= 6) {
       Swal.fire({
         icon: "error",
@@ -29,7 +28,6 @@ const PokemonList = () => {
       });
       return;
     }
-
     if (myPokemon.find((p) => p.id === pokemon.id)) {
       Swal.fire({
         icon: "warning",
@@ -37,15 +35,8 @@ const PokemonList = () => {
       });
       return;
     }
-
     setMyPokemon((prev) => [...prev, pokemon]); // 중복이 없으면 추가
   };
-
-  // const [data, setData] = useState(MOCK_DATA);
-
-  // useEffect(() => {
-  //   setData(MOCK_DATA);
-  // }, []);
 
   return (
     <CardList>

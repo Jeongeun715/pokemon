@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Dashboard from "../components/Dashboard";
 import PokemonList from "../components/PokemonList";
 import styled from "styled-components";
-import { FamilyContext } from "../context/FamilyContext";
+import PokomonProvider from "../context/PokomonProvider";
 
 const Screen = styled.div`
   display: flex;
@@ -11,15 +11,11 @@ const Screen = styled.div`
 `;
 
 const Dex = () => {
-  const [myPokemon, setMyPokemon] = useState([]);
-
   return (
     <div>
       <Screen>
-        <FamilyContext.Provider value={{ myPokemon, setMyPokemon }}>
-          <Dashboard />
-          <PokemonList />
-        </FamilyContext.Provider>
+        <Dashboard />
+        <PokemonList />
       </Screen>
     </div>
   );

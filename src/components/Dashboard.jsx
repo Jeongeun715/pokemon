@@ -46,6 +46,7 @@ const Pokeball = styled.div`
 `;
 
 function Dashboard() {
+  //Dex에서 myPokemon 배열을 프롭스로 전달받음, 추가된 포켓몬 객체가 저장되어있음
   const { myPokemon, setMyPokemon } = useContext(FamilyContext);
 
   const removePokemon = (pokemonId) => {
@@ -53,7 +54,6 @@ function Dashboard() {
   };
 
   const remainingSlots = 6 - myPokemon.length; // 남은 포켓볼 개수 계산
-
   return (
     <div>
       <DashList>
