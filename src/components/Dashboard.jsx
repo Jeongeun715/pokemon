@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import PokemonCard from "./PokemonCard";
+import { FamilyContext } from "../context/FamilyContext";
 
 const DashList = styled.div`
   display: flex;
@@ -44,14 +45,15 @@ const Pokeball = styled.div`
   border-radius: 10px;
 `;
 
-const PokemonImage = styled.img`
-  width: 60%;
-  height: auto;
-`;
+function Dashboard() {
+  const { myPokemon, setMyPokemon } = useContext(FamilyContext);
 
-function Dashboard({ myPokemon, removePokemon }) {
-  //Dex에서 myPokemon 배열을 프롭스로 전달받음, 추가된 포켓몬 객체가 저장되어있음
+  const removePokemon = (pokemonId) => {
+    setMyPokemon((prev) => prev.filter((p) => p.id !== pokemonId)); // 전달된 id의 포켓몬 삭제
+  };
+
   const remainingSlots = 6 - myPokemon.length; // 남은 포켓볼 개수 계산
+
   return (
     <div>
       <DashList>

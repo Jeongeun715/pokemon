@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom"; // useNavigate 훅 추가
 
 const Card = styled.div`
   border: 1px solid rgb(221, 221, 221);
@@ -29,20 +30,6 @@ const PokeNumber = styled.p`
   color: rgb(102, 102, 102);
 `;
 
-// const AddButton = styled.button`
-//   margin-top: 10px;
-//   padding: 5px 10px;
-//   font-size: 12px;
-//   cursor: pointer;
-//   border: none;
-//   background-color: rgb(255, 0, 0);
-//   color: rgb(255, 255, 255);
-//   border-radius: 5px;
-
-//   &:hover {
-//     background-color: rgb(200, 0, 0);
-//   }
-// `;
 const BaseButton = styled.button`
   margin-top: 10px;
   padding: 5px 10px;
@@ -63,7 +50,7 @@ const AddButton = styled(BaseButton)`
 `;
 
 // 삭제 버튼 스타일
-const RemoveButton = styled(BaseButton)`
+const DeleteButton = styled(BaseButton)`
   background-color: red;
 
   &:hover {
@@ -72,16 +59,32 @@ const RemoveButton = styled(BaseButton)`
 `;
 
 const PokemonCard = ({ image, name, number, isRemovable, onAdd, onRemove }) => {
+  const navigate = useNavigate(); // useNavigate 훅 사용
+
+  const handleCardClick = () => {
+    navigate(`/pokemon/${number}`); // 클릭 시 상세 페이지로 이동
+  };
+
+  const handleAddClick = (e) => {
+    e.stopPropagation(); // 상위 Card의 클릭 이벤트 중지
+    onAdd(); // 추가 로직 실행
+  };
+
+  const handleRemoveClick = (e) => {
+    e.stopPropagation(); // 상위 Card의 클릭 이벤트 중지
+    onRemove(); // 삭제 로직 실행
+  };
+
   return (
     <>
-      <Card>
+      <Card onClick={handleCardClick}>
         <img src={image} alt="" />
         <Name>{name}</Name>
         <PokeNumber>No. {number}</PokeNumber>
         {isRemovable ? (
-          <RemoveButton onClick={onRemove}>삭제</RemoveButton>
+          <DeleteButton onClick={handleRemoveClick}>삭제</DeleteButton>
         ) : (
-          <AddButton onClick={onAdd}>추가</AddButton>
+          <AddButton onClick={handleAddClick}>추가</AddButton>
         )}
       </Card>
     </>
