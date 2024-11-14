@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import pokemonLogo from "../assets/pokemon-logo-RN0wntMB.png";
 const StartButton = styled.button`
   background-color: red;
   cursor: pointer;
@@ -31,11 +31,7 @@ const Home = () => {
   return (
     <>
       <Center>
-        <img
-          src="src/assets/pokemon-logo-RN0wntMB.png"
-          alt="Pokemon Logo"
-          width={600}
-        />
+        <img src={pokemonLogo} alt="Pokemon Logo" width={600} />
 
         <StartButton
           onClick={() => {
